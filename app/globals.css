@@ -1,26 +1,140 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Teal academic palette – #508593 */
+  --background: oklch(0.985 0.002 210);
+  --foreground: oklch(0.15 0.03 210);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.03 210);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.03 210);
+  --primary: oklch(0.56 0.055 210);
+  --primary-foreground: oklch(0.98 0.002 210);
+  --secondary: oklch(0.96 0.008 210);
+  --secondary-foreground: oklch(0.20 0.05 210);
+  --muted: oklch(0.965 0.004 210);
+  --muted-foreground: oklch(0.45 0.02 210);
+  --accent: oklch(0.95 0.012 210);
+  --accent-foreground: oklch(0.20 0.05 210);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.008 210);
+  --input: oklch(0.92 0.008 210);
+  --ring: oklch(0.50 0.06 210);
+  --gold: oklch(0.72 0.14 75);
+  --gold-foreground: oklch(0.20 0.05 60);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: oklch(0.13 0.02 210);
+  --foreground: oklch(0.96 0.005 210);
+  --card: oklch(0.18 0.02 210);
+  --card-foreground: oklch(0.96 0.005 210);
+  --popover: oklch(0.18 0.02 210);
+  --popover-foreground: oklch(0.96 0.005 210);
+  --primary: oklch(0.72 0.07 210);
+  --primary-foreground: oklch(0.13 0.02 210);
+  --secondary: oklch(0.22 0.02 210);
+  --secondary-foreground: oklch(0.96 0.005 210);
+  --muted: oklch(0.22 0.02 210);
+  --muted-foreground: oklch(0.65 0.02 210);
+  --accent: oklch(0.22 0.02 210);
+  --accent-foreground: oklch(0.96 0.005 210);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.60 0.07 210);
+  --gold: oklch(0.78 0.14 75);
+  --gold-foreground: oklch(0.13 0.02 60);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Typography scale */
+h1 {
+  @apply text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl;
+}
+h2 {
+  @apply text-3xl font-bold leading-snug tracking-tight sm:text-4xl;
+}
+h3 {
+  @apply text-xl font-semibold leading-snug tracking-tight sm:text-2xl;
+}
+h4 {
+  @apply text-lg font-semibold leading-snug;
+}
+p {
+  @apply leading-relaxed;
+}
+
+/* Spacing utilities */
+.section-padding {
+  @apply py-16 md:py-24;
+}
+.section-padding-sm {
+  @apply py-10 md:py-16;
 }
