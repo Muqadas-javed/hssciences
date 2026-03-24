@@ -90,11 +90,11 @@ export function Navbar({
         {/* Logo — academic crest style */}
         <Link href="/" className="flex shrink-0 items-center" aria-label="Health Systems Sciences — Home">
           <Image
-            src="/images/Health-Systems-Science-Primary-Logo-Retina.png"
+            src="/images/Logo.png"
             alt="Health Systems Sciences"
             width={220}
             height={50}
-            className="h-10 w-auto lg:h-12"
+            className="h-12 w-auto lg:h-14"
             priority
           />
         </Link>
@@ -201,7 +201,7 @@ export function Navbar({
             {global.phone}
           </a>
           <Link
-            href="/contact-quote"
+            href="/request-form-page"
             className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             Get a Quote

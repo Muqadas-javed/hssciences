@@ -40,7 +40,7 @@ export function constructMetadata({
 } = {}): Metadata {
   const resolvedTitle = title
     ? `${title} | ${siteConfig.name}`
-    : `${siteConfig.name} — Certified Testing, Compliance & Validation`;
+    : `Environmental Compliance Experts | ${siteConfig.name}`;
   const resolvedDescription = description ?? siteConfig.description;
   const resolvedImage = image ?? siteConfig.ogImage;
   const canonicalUrl = `${siteConfig.url}${pathname}`;
@@ -90,6 +90,11 @@ export function constructMetadata({
       title: resolvedTitle,
       description: resolvedDescription,
       images: [resolvedImage],
+    },
+    icons: {
+      icon: "/images/HSS-icon.png",
+      shortcut: "/images/HSS-icon.png",
+      apple: "/images/HSS-icon.png",
     },
     robots: noIndex
       ? { index: false, follow: false }

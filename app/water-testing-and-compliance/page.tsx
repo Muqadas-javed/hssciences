@@ -49,14 +49,22 @@ const legionellaServices = [
   {
     icon: FileText,
     title: "Water Management Plans (WMP)",
+    image: "https://hssciences.com/wp-content/uploads/2025/11/Water-Testing-Compliance-Services3.jpg",
+    imageAlt: "Scientist holding a beaker with water wearing a protective glove in a laboratory",
     items: [
       "Development, review, and update of ASHRAE 188 compliant plans",
       "On-site system mapping and critical control point identification",
+      "Risk assessment of building water systems and distribution networks",
+      "Monitoring schedules, control limits, and corrective action protocols",
+      "Team roles, responsibilities, and communication procedures",
+      "Validation and verification procedures for ongoing compliance",
     ],
   },
   {
     icon: ClipboardList,
     title: "Program Audits & Documentation",
+    image: "https://hssciences.com/wp-content/uploads/2025/11/Water-Testing-Compliance-Services4.jpg",
+    imageAlt: "Scientist in protective gear using a microscope in a laboratory setting",
     items: [
       "Trend analysis and response action guidance",
       "Remediation verification testing after disinfection or system correction",
@@ -210,59 +218,52 @@ export default function WaterTestingPage() {
       </section>
 
       {/* ── Legionella Risk Management ────────────────────────── */}
-      <section className="bg-gray-50 py-20 md:py-28">
-        <Container>
-          <div className="grid items-center gap-14 lg:grid-cols-2">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Risk Management</span>
-              <h2 className="mt-3 font-bold text-foreground" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}>
-                Legionella Risk Management &amp; Compliance Support
-              </h2>
-              <div className="mt-4 h-1 w-12 rounded-full bg-gold" />
-              <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                HSS supports the full cycle of Legionella compliance — from initial water management
-                plan development through ongoing monitoring, audit documentation, and post-remediation
-                clearance testing.
-              </p>
+      <section className="relative overflow-hidden bg-gray-50 py-20 md:py-28">
+        <Container className="relative">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Risk Management</span>
+            <h2 className="mt-3 font-bold text-foreground" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}>
+              Legionella Risk Management &amp; Compliance Support
+            </h2>
+            <div className="mx-auto mt-4 h-1 w-12 rounded-full bg-gold" />
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              HSS supports the full cycle of Legionella compliance — from initial water management
+              plan development through ongoing monitoring, audit documentation, and post-remediation
+              clearance testing.
+            </p>
+          </div>
 
-              <div className="mt-8 space-y-5">
-                {legionellaServices.map((s) => (
-                  <div key={s.title} className="rounded-2xl border border-border bg-white p-6 shadow-sm">
-                    <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2.5 text-primary">
-                      <s.icon className="size-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="font-semibold text-foreground" style={{ fontSize: "0.95rem" }}>
-                      {s.title}
-                    </h3>
-                    <ul className="mt-3 space-y-2">
-                      {s.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden="true" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {legionellaServices.map((s) => (
+              <div
+                key={s.title}
+                className="group overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={s.image}
+                    alt={s.imageAlt}
+                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="mb-5 inline-flex rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                    <s.icon className="size-6" aria-hidden="true" />
                   </div>
-                ))}
+                  <h3 className="font-semibold text-foreground" style={{ fontSize: "1rem" }}>
+                    {s.title}
+                  </h3>
+                  <ul className="mt-4 space-y-2.5">
+                    {s.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                        <CheckCircle className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-
-            <div className="space-y-5">
-              <div className="overflow-hidden rounded-2xl shadow-xl">
-                <img
-                  src="https://hssciences.com/wp-content/uploads/2025/11/Water-Testing-Compliance-Services3.jpg"
-                  alt="Scientist holding a beaker with water wearing a protective glove in a laboratory"
-                  className="h-56 w-full object-cover"
-                />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-xl">
-                <img
-                  src="https://hssciences.com/wp-content/uploads/2025/11/Water-Testing-Compliance-Services4.jpg"
-                  alt="Scientist in protective gear using a microscope in a laboratory setting"
-                  className="h-56 w-full object-cover"
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </Container>
       </section>

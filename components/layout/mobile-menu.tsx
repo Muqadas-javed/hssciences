@@ -209,7 +209,7 @@ export function MobileMenu({
                 Call {global.phone}
               </a>
               <Link
-                href="/contact-quote"
+                href="/request-form-page"
                 onClick={onClose}
                 className="flex h-11 w-full items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >

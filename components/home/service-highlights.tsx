@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 import { Container } from "@/components/layout";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -14,22 +14,24 @@ const images = ["/images/1.jpg", "/images/2.jpg", "/images/3.jpg", "/images/4.jp
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.18 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 60, scale: 0.9, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const },
   },
 };
 
 export function ServiceHighlights() {
   return (
-    <section className="relative z-20 bg-gradient-to-b from-white to-gray-50/80 py-20 md:py-28">
+    <section className="relative z-20 bg-gradient-to-b from-white to-gray-50/80 py-16 md:py-20">
       <Container>
         <SectionHeader
           label="What We Do"
@@ -72,16 +74,64 @@ function ServiceCard({
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // 3D tilt effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
+    damping: 20,
+    stiffness: 150,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
+    damping: 20,
+    stiffness: 150,
+  });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+    setHovered(false);
+  }
 
   return (
     <motion.div
+      ref={cardRef}
       variants={cardVariants}
-      className="group relative h-64 cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-shadow duration-500 hover:shadow-2xl sm:h-72"
+      className="group relative h-64 cursor-pointer overflow-hidden rounded-2xl shadow-lg sm:h-72"
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 800,
+      }}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", damping: 20, stiffness: 200 }}
     >
       {/* Glowing border on hover */}
       <div className="pointer-events-none absolute inset-0 z-20 rounded-2xl border-2 border-transparent transition-colors duration-500 group-hover:border-gold/40" />
+
+      {/* Shine effect on hover */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.15) 50%, transparent 55%)",
+        }}
+        aria-hidden="true"
+      />
 
       {/* Image with zoom */}
       <Image

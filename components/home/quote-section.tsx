@@ -1,11 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Phone, Mail, ArrowRight, MapPin, Clock } from "lucide-react";
 import { Container } from "@/components/layout";
 import { siteContent } from "@/data/siteContent";
 
 const { global: g } = siteContent;
+
+const contactCardVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.25, 0.4, 0.25, 1] as const },
+  }),
+};
 
 export function QuoteSection() {
   const [formData, setFormData] = useState({
@@ -30,15 +40,31 @@ export function QuoteSection() {
 
   return (
     <section className="relative overflow-hidden bg-primary py-12 md:py-16">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute -right-40 -top-40 size-[500px] rounded-full bg-white/5 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute -bottom-40 -left-40 size-[400px] rounded-full bg-white/5 blur-3xl" aria-hidden="true" />
+      {/* Animated background decoration */}
+      <motion.div
+        className="pointer-events-none absolute -right-40 -top-40 size-[500px] rounded-full bg-white/5 blur-3xl"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        aria-hidden="true"
+      />
+      <motion.div
+        className="pointer-events-none absolute -bottom-40 -left-40 size-[400px] rounded-full bg-white/5 blur-3xl"
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        aria-hidden="true"
+      />
 
       <Container className="relative">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
 
           {/* Left: CTA info */}
-          <div className="text-white">
+          <motion.div
+            initial={{ opacity: 0, x: -40, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+            className="text-white"
+          >
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               Get in Touch
             </span>
@@ -48,65 +74,97 @@ export function QuoteSection() {
             >
               Ready to Get Started?
             </h2>
-            <div className="mt-4 h-1 w-12 rounded-full bg-gold" aria-hidden="true" />
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: 48 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mt-4 h-1 rounded-full bg-gold"
+              aria-hidden="true"
+            />
             <p className="mt-6 text-base leading-relaxed text-white/75">
               Whether you need cleanroom certification, air quality testing, or comprehensive EHS solutions — our team of certified professionals is ready to deliver measurable results.
             </p>
 
             <div className="mt-6 space-y-3">
-              <a
-                href={`tel:${g.phone.replace(/[^\d]/g, "")}`}
-                className="group flex items-center gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm transition-all hover:border-gold/40 hover:bg-white/15"
-              >
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-gold/20 text-gold">
-                  <Phone className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Call us directly</p>
-                  <p className="font-semibold text-white">{g.phone}</p>
-                </div>
-                <ArrowRight className="ml-auto size-4 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
-              </a>
+              {[
+                {
+                  href: `tel:${g.phone.replace(/[^\d]/g, "")}`,
+                  icon: Phone,
+                  label: "Call us directly",
+                  value: g.phone,
+                  isLink: true,
+                },
+                {
+                  href: `mailto:${g.email}`,
+                  icon: Mail,
+                  label: "Email us",
+                  value: g.email,
+                  isLink: true,
+                },
+                {
+                  icon: MapPin,
+                  label: "Corporate Office",
+                  value: g.corporateOffice.street,
+                  extra: `${g.corporateOffice.city}, ${g.corporateOffice.state} ${g.corporateOffice.zip}, USA`,
+                },
+                {
+                  icon: Clock,
+                  label: "Business Hours",
+                  value: "Monday – Friday, 8:00 AM – 5:00 PM MST",
+                },
+              ].map((card, i) => {
+                const inner = (
+                  <>
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-gold/20 text-gold">
+                      <card.icon className="size-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-white/50">{card.label}</p>
+                      <p className="font-semibold text-white">{card.value}</p>
+                      {card.extra && <p className="text-sm text-white/70">{card.extra}</p>}
+                    </div>
+                    {card.isLink && (
+                      <ArrowRight className="ml-auto size-4 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
+                    )}
+                  </>
+                );
 
-              <a
-                href={`mailto:${g.email}`}
-                className="group flex items-center gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm transition-all hover:border-gold/40 hover:bg-white/15"
-              >
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-gold/20 text-gold">
-                  <Mail className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Email us</p>
-                  <p className="font-semibold text-white">{g.email}</p>
-                </div>
-                <ArrowRight className="ml-auto size-4 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
-              </a>
-
-              <div className="flex items-start gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-gold/20 text-gold">
-                  <MapPin className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Corporate Office</p>
-                  <p className="font-semibold text-white">{g.corporateOffice.street}</p>
-                  <p className="text-sm text-white/70">{g.corporateOffice.city}, {g.corporateOffice.state} {g.corporateOffice.zip}, USA</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-gold/20 text-gold">
-                  <Clock className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Business Hours</p>
-                  <p className="font-semibold text-white">Monday – Friday, 8:00 AM – 5:00 PM MST</p>
-                </div>
-              </div>
+                return (
+                  <motion.div
+                    key={card.label}
+                    custom={i}
+                    variants={contactCardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-40px" }}
+                  >
+                    {card.isLink ? (
+                      <a
+                        href={card.href}
+                        className="group flex items-center gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm transition-all hover:border-gold/40 hover:bg-white/15"
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      <div className="flex items-start gap-4 rounded-xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
+                        {inner}
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Form */}
-          <div className="rounded-2xl bg-white p-6 shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, x: 40, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.4, 0.25, 1] }}
+            className="rounded-2xl bg-white p-6 shadow-2xl"
+          >
             <h3 className="font-bold text-foreground" style={{ fontSize: "1.25rem" }}>
               Get Started with a Quote
             </h3>
@@ -194,13 +252,16 @@ export function QuoteSection() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full rounded-full bg-primary px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg disabled:opacity-60"
+                  className="group relative w-full overflow-hidden rounded-full bg-primary px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg disabled:opacity-60"
                 >
-                  {status === "submitting" ? "Submitting…" : "Request a Quote"}
+                  <span className="relative z-10">
+                    {status === "submitting" ? "Submitting…" : "Request a Quote"}
+                  </span>
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" aria-hidden="true" />
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

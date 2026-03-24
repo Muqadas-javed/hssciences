@@ -398,9 +398,9 @@ export const siteContent = {
     hero: {
       heading: "COMPANY OVERVIEW",
       subheading:
-        "Health Systems Sciences (HSS) brings expertise, experience, and clear insight to optimize processes, facilities, and the built environment.",
+        "Expertise, Experience & Clear Insight",
       teamDescription:
-        "Our team includes CETA-certified technicians, professional engineers, and industrial hygiene specialists who use evidence-based, systematic methods to keep people safe and operations compliant.",
+        "Health Systems Sciences (HSS) brings deep expertise and clear insight to optimize processes, facilities, and the built environment. Our team includes CETA-certified technicians, professional engineers, and industrial hygiene specialists who use evidence-based, systematic methods to keep people safe and operations compliant.",
     },
 
     section: {

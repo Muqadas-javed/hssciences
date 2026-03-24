@@ -58,6 +58,7 @@ const spillResponseItems = [
   "Emergency action and response plan development",
   "Staff training support for spill containment procedures",
   "Post-incident environmental verification sampling (as needed)",
+  "Decontamination procedures and PPE requirements documentation",
 ];
 
 const standards = [

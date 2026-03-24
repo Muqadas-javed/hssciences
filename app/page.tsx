@@ -27,7 +27,6 @@ const QuoteSection = dynamic(
 );
 
 export const metadata: Metadata = constructMetadata({
-  title: "Certified Testing, Validation & Compliance Solutions",
   description:
     "Health Systems Sciences delivers certified testing, validation, and compliance solutions for cleanrooms, healthcare, manufacturing and laboratories nationwide.",
   pathname: "/",
