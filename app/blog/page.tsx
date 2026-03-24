@@ -83,7 +83,7 @@ export default function BlogPage() {
                 key={post.href}
                 className="group rounded-xl border border-border bg-card overflow-hidden transition-all hover:border-gold/40 hover:shadow-lg"
               >
-                {post.image && (
+                {"image" in post && post.image && (
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={post.image}
@@ -97,13 +97,13 @@ export default function BlogPage() {
 
                 <div className="p-5">
                   <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-3">
-                    {post.date && (
+                    {"date" in post && post.date && (
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="size-3" aria-hidden="true" />
                         {post.date}
                       </span>
                     )}
-                    {post.author && (
+                    {"author" in post && post.author && (
                       <span className="inline-flex items-center gap-1">
                         <User className="size-3" aria-hidden="true" />
                         {post.author}
@@ -115,7 +115,7 @@ export default function BlogPage() {
                     {post.title}
                   </h2>
 
-                  {post.excerpt && (
+                  {"excerpt" in post && post.excerpt && (
                     <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                       {post.excerpt}
                     </p>
