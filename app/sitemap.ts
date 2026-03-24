@@ -44,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/professional-mold-visual-inspection",
     "/mold-testing-for-homes",
     "/mold-inspection-testing-guide",
-    "/ndustrial-hygiene-workplace-safety",
+    "/industrial-hygiene-workplace-safety",
     "/hepa-filter-testing-guide",
     "/hvac-duct-testing",
   ].map((path) => ({

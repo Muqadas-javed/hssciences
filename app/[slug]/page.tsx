@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CheckCircle, Shield, ArrowRight, Calendar, User } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, serviceSchema, blogPostingSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -39,15 +39,39 @@ export function generateMetadata({
         title: service.title,
         description: service.description.slice(0, 160),
         pathname: service.href,
+        keywords: [
+          "Health Systems Sciences",
+          "facility testing",
+          "environmental compliance",
+          service.title,
+        ],
       });
     }
     const post = getBlogPost(slug);
     if (post) {
-      return constructMetadata({
+      const meta = constructMetadata({
         title: post.title,
         description: post.excerpt?.replace("[...]", "").trim() ?? "",
         pathname: post.href,
+        keywords: [
+          "Health Systems Sciences blog",
+          "environmental compliance",
+          post.title,
+        ],
       });
+      return {
+        ...meta,
+        openGraph: {
+          ...meta.openGraph,
+          type: "article",
+          ...("date" in post && post.date
+            ? { publishedTime: post.date }
+            : {}),
+          ...("author" in post && post.author
+            ? { authors: [post.author] }
+            : {}),
+        },
+      };
     }
     return {};
   });
@@ -75,6 +99,11 @@ export default async function DynamicPage({
       { name: "Services", href: "/services" },
       { name: service.title, href: service.href },
     ]);
+    const svcSchema = serviceSchema({
+      name: service.title,
+      description: service.description.slice(0, 160),
+      pathname: service.href,
+    });
 
     return (
       <>
@@ -85,6 +114,10 @@ export default async function DynamicPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }}
         />
 
         {/* Hero */}
@@ -158,10 +191,19 @@ export default async function DynamicPage({
 
   // Blog post
   const blogPost = post!;
-  const pageSchema = webPageSchema({
-    title: `${blogPost.title} — Health Systems Sciences`,
+  const blogSchema = blogPostingSchema({
+    title: blogPost.title,
     description: blogPost.excerpt?.replace("[...]", "").trim() ?? "",
     pathname: blogPost.href,
+    ...("date" in blogPost && blogPost.date
+      ? { datePublished: blogPost.date }
+      : {}),
+    ...("author" in blogPost && blogPost.author
+      ? { author: blogPost.author }
+      : {}),
+    ...("image" in blogPost && blogPost.image
+      ? { image: blogPost.image }
+      : {}),
   });
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", href: "/" },
@@ -173,7 +215,7 @@ export default async function DynamicPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
       <script
         type="application/ld+json"
@@ -211,13 +253,13 @@ export default async function DynamicPage({
       </section>
 
       {/* Content */}
-      <section className="py-16 md:py-24">
+      <article className="py-16 md:py-24">
         <Container className="max-w-3xl">
           {"image" in blogPost && blogPost.image && (
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl mb-10">
               <Image
                 src={blogPost.image}
-                alt={blogPost.title}
+                alt={`Illustration for ${blogPost.title}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 768px"
@@ -245,7 +287,7 @@ export default async function DynamicPage({
             </Link>
           </div>
         </Container>
-      </section>
+      </article>
     </>
   );
 }

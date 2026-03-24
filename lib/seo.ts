@@ -402,3 +402,48 @@ export function faqSchema(
     })),
   };
 }
+
+// ── Blog Posting Schema ──────────────────────────────────
+export function blogPostingSchema({
+  title,
+  description,
+  pathname,
+  datePublished,
+  author,
+  image,
+}: {
+  title: string;
+  description: string;
+  pathname: string;
+  datePublished?: string;
+  author?: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    url: `${siteConfig.url}${pathname}`,
+    ...(datePublished && { datePublished }),
+    ...(author && {
+      author: { "@type": "Person", name: author },
+    }),
+    ...(image && {
+      image: { "@type": "ImageObject", url: image },
+    }),
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/images/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}${pathname}`,
+    },
+  };
+}

@@ -20,7 +20,7 @@ const companyLinks = [
 
 const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Sitemap", href: "/sitemap" },
+  { label: "Sitemap", href: "/sitemap.xml" },
 ];
 
 export function Footer() {
@@ -85,7 +85,7 @@ export function Footer() {
               <a
                 href={global.linkedIn}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex size-9 items-center justify-center rounded-lg border border-primary-foreground/15 text-primary-foreground/60 transition-colors hover:bg-primary-foreground/10 hover:text-gold"
                 aria-label="LinkedIn"
               >

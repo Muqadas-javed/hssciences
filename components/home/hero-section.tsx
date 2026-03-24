@@ -46,7 +46,7 @@ export function HeroSection() {
       >
         <Image
           src="/images/hero.jpg"
-          alt=""
+          alt="HSS technician performing certified cleanroom testing and environmental compliance services"
           fill
           priority
           className="object-cover object-center"
