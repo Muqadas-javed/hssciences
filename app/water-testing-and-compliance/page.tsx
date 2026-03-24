@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Droplets, Building, AlertTriangle, FileText, ClipboardList, Building2 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides potable water testing, Legionella program support, environmental sampling, and compliance documentation for healthcare facilities, research environments, and institutional campuses.",
   pathname: "/water-testing-and-compliance",
+  keywords: [
+    ...keywordGroups.water,
+    "water testing services",
+    "Legionella testing",
+    "Legionella risk management",
+    "potable water testing",
+    "water management plan",
+    "healthcare water compliance",
+    "water sampling services",
+  ],
 });
 
 const coreServices = [
@@ -111,11 +121,17 @@ export default function WaterTestingPage() {
     { name: "Services", href: "/services" },
     { name: "Water Testing & Compliance Services", href: "/water-testing-and-compliance" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Water Testing & Compliance Services",
+    description: "Potable water testing, Legionella program support, environmental sampling, and compliance documentation for healthcare facilities, research environments, and institutional campuses.",
+    pathname: "/water-testing-and-compliance",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

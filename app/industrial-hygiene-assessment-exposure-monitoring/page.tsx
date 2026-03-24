@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Wind, ShieldAlert, FlaskConical, Building2 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides industrial hygiene assessments, exposure sampling, hazard evaluation, and compliance documentation to support healthcare, laboratory, research, and industrial environments.",
   pathname: "/industrial-hygiene-assessment-exposure-monitoring",
+  keywords: [
+    ...keywordGroups.industrialHygiene,
+    "industrial hygiene assessment",
+    "exposure monitoring services",
+    "OSHA compliance",
+    "workplace safety assessment",
+    "chemical exposure sampling",
+    "noise dosimetry",
+    "occupational health",
+  ],
 });
 
 const coreServices = [
@@ -82,11 +92,17 @@ export default function IndustrialHygienePage() {
     { name: "Services", href: "/services" },
     { name: "Industrial Hygiene Assessment & Exposure Monitoring", href: "/industrial-hygiene-assessment-exposure-monitoring" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Industrial Hygiene Assessment & Exposure Monitoring",
+    description: "Industrial hygiene assessments, exposure sampling, hazard evaluation, and compliance documentation to support healthcare, laboratory, research, and industrial environments.",
+    pathname: "/industrial-hygiene-assessment-exposure-monitoring",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

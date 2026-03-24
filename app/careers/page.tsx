@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -12,6 +12,14 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Join the Health Systems Sciences team. Explore career opportunities in testing, certification, and compliance.",
   pathname: "/careers",
+  keywords: [
+    "HSS careers",
+    "environmental testing jobs",
+    "cleanroom certification careers",
+    "industrial hygiene jobs",
+    "compliance specialist jobs",
+    "Health Systems Sciences careers",
+  ],
 });
 
 export default function CareersPage() {

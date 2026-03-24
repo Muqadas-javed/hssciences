@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { HeroSection } from "@/components/home/hero-section";
 import { AboutSection } from "@/components/home/about-section";
 import { ServiceHighlights } from "@/components/home/service-highlights";
@@ -30,6 +30,20 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Health Systems Sciences delivers certified testing, validation, and compliance solutions for cleanrooms, healthcare, manufacturing and laboratories nationwide.",
   pathname: "/",
+  keywords: [
+    ...keywordGroups.core,
+    "cleanroom certification",
+    "USP 797 certification",
+    "USP 800 certification",
+    "environmental compliance experts",
+    "HVAC testing and balancing",
+    "biosafety cabinet testing",
+    "HEPA filter testing",
+    "industrial hygiene assessment",
+    "mold testing services",
+    "facility testing and certification",
+    "healthcare compliance solutions",
+  ],
 });
 
 export default function HomePage() {

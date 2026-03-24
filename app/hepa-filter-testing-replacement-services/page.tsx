@@ -11,7 +11,7 @@ import {
   FileText,
   Building2,
 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -19,6 +19,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides HEPA filter integrity testing, leak scanning, diagnostics, and replacement support for cleanrooms, sterile compounding facilities, laboratories, hospital isolation rooms, and controlled environments.",
   pathname: "/hepa-filter-testing-replacement-services",
+  keywords: [
+    ...keywordGroups.hepa,
+    "HEPA filter integrity testing",
+    "HEPA filter replacement",
+    "DOP testing",
+    "PAO testing",
+    "filter leak testing",
+    "cleanroom HEPA filter",
+    "ULPA filter testing",
+  ],
 });
 
 const coreServices = [
@@ -120,11 +130,17 @@ export default function HepaFilterTestingPage() {
     { name: "Services", href: "/services" },
     { name: "HEPA Filter Testing & Replacement", href: "/hepa-filter-testing-replacement-services" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "HEPA Filter Testing & Replacement Services",
+    description: "HEPA filter integrity testing, leak scanning, diagnostics, and replacement support for cleanrooms, sterile compounding facilities, laboratories, and controlled environments.",
+    pathname: "/hepa-filter-testing-replacement-services",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

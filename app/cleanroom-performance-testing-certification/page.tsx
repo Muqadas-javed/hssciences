@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, ArrowRight, FlaskConical, Wind, Microscope } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides comprehensive cleanroom performance testing, certification, and monitoring services for sterile compounding pharmacies, laboratories, research facilities, and healthcare environments.",
   pathname: "/cleanroom-performance-testing-certification",
+  keywords: [
+    ...keywordGroups.cleanroom,
+    ...keywordGroups.core,
+    "cleanroom certification services",
+    "ISO 14644 testing",
+    "sterile compounding cleanroom",
+    "particle count testing",
+    "cleanroom commissioning",
+    "pharmaceutical cleanroom testing",
+  ],
 });
 
 const coreServices = [
@@ -86,11 +96,17 @@ export default function CleanroomCertificationPage() {
     { name: "Services", href: "/services" },
     { name: "Cleanroom Performance Testing & Certification", href: "/cleanroom-performance-testing-certification" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Cleanroom Performance Testing & Certification",
+    description: "Comprehensive cleanroom performance testing, certification, and monitoring services for sterile compounding pharmacies, laboratories, research facilities, and healthcare environments.",
+    pathname: "/cleanroom-performance-testing-certification",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

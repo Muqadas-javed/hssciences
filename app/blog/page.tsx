@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, User } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -13,6 +13,15 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Insights, guides, and best practices from Health Systems Sciences on cleanroom testing, industrial hygiene, and environmental compliance.",
   pathname: "/blog",
+  keywords: [
+    ...keywordGroups.core,
+    "cleanroom testing blog",
+    "industrial hygiene guides",
+    "environmental compliance resources",
+    "facility testing best practices",
+    "HEPA filter testing guide",
+    "mold testing guide",
+  ],
 });
 
 export default function BlogPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -11,6 +11,15 @@ export const metadata: Metadata = constructMetadata({
   title: "Environmental Health & Safety Services",
   description: ehsServices.paragraph.slice(0, 160),
   pathname: "/services/environmental-health-and-safety-2",
+  keywords: [
+    ...keywordGroups.ehs,
+    "environmental health and safety",
+    "EHS consulting services",
+    "safety program development",
+    "regulatory compliance",
+    "workplace safety consulting",
+    "OSHA compliance services",
+  ],
 });
 
 export default function EHSServicesPage() {

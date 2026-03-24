@@ -22,6 +22,107 @@ export const siteConfig = {
   foundingDate: "2015",
 } as const;
 
+// ── Primary keyword groups (high-rank targets) ───────────
+export const keywordGroups = {
+  core: [
+    "cleanroom certification",
+    "cleanroom testing",
+    "environmental compliance",
+    "facility testing and certification",
+    "Health Systems Sciences",
+    "HSS",
+    "SDVOSB certified testing company",
+  ],
+  usp: [
+    "USP 797 certification",
+    "USP 800 certification",
+    "USP 825 certification",
+    "pharmacy cleanroom certification",
+    "compounding pharmacy testing",
+    "sterile compounding compliance",
+    "hazardous drug handling compliance",
+  ],
+  cleanroom: [
+    "cleanroom performance testing",
+    "ISO 14644 cleanroom classification",
+    "particle count testing",
+    "airflow velocity testing",
+    "HEPA filter integrity testing",
+    "room pressurization testing",
+    "cleanroom commissioning",
+  ],
+  iaq: [
+    "indoor air quality testing",
+    "mold investigation",
+    "mold assessment",
+    "mold testing services",
+    "indoor air quality assessment",
+    "air quality monitoring",
+    "IAQ testing",
+  ],
+  hvac: [
+    "HVAC testing adjusting balancing",
+    "TAB services",
+    "HVAC commissioning",
+    "air balancing",
+    "ventilation testing",
+    "ASHRAE compliance testing",
+    "ductwork testing",
+  ],
+  biosafety: [
+    "biosafety cabinet certification",
+    "biosafety cabinet testing",
+    "BSC certification",
+    "chemical fume hood testing",
+    "fume hood face velocity testing",
+    "NSF 49 certification",
+    "laboratory safety testing",
+  ],
+  hepa: [
+    "HEPA filter testing",
+    "HEPA filter replacement",
+    "HEPA filter leak testing",
+    "DOP testing",
+    "filter integrity testing",
+    "ULPA filter testing",
+  ],
+  industrialHygiene: [
+    "industrial hygiene assessment",
+    "exposure monitoring",
+    "workplace safety assessment",
+    "OSHA compliance",
+    "occupational health assessment",
+    "chemical exposure monitoring",
+    "noise monitoring",
+  ],
+  hazmat: [
+    "hazardous material management",
+    "asbestos testing",
+    "lead paint testing",
+    "environmental site assessment",
+    "hazmat consulting",
+    "spill response planning",
+    "environmental remediation",
+  ],
+  water: [
+    "water testing services",
+    "Legionella testing",
+    "Legionella risk management",
+    "potable water testing",
+    "water compliance",
+    "water management plan",
+    "Legionella risk assessment",
+  ],
+  ehs: [
+    "environmental health and safety",
+    "EHS consulting",
+    "EHS compliance",
+    "safety program development",
+    "regulatory compliance consulting",
+    "workplace safety consulting",
+  ],
+} as const;
+
 // ── Next.js Metadata helper ──────────────────────────────
 export function constructMetadata({
   title,
@@ -49,6 +150,7 @@ export function constructMetadata({
     title: resolvedTitle,
     description: resolvedDescription,
     keywords: keywords ?? [
+      ...keywordGroups.core,
       "cleanroom certification",
       "USP 797",
       "USP 800",
@@ -60,7 +162,9 @@ export function constructMetadata({
       "pharmacy certification",
       "environmental health and safety",
       "facility testing",
-      "Health Systems Sciences",
+      "environmental compliance experts",
+      "certified testing company",
+      "compliance solutions",
     ],
     authors: [{ name: siteConfig.name, url: siteConfig.url }],
     creator: siteConfig.name,
@@ -234,6 +338,67 @@ export function breadcrumbSchema(
       position: i + 1,
       name: item.name,
       item: `${siteConfig.url}${item.href}`,
+    })),
+  };
+}
+
+// ── Service Schema ───────────────────────────────────────
+export function serviceSchema({
+  name,
+  description,
+  pathname,
+  provider = siteConfig.name,
+  areaServed = "United States",
+}: {
+  name: string;
+  description: string;
+  pathname: string;
+  provider?: string;
+  areaServed?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    url: `${siteConfig.url}${pathname}`,
+    provider: {
+      "@type": "Organization",
+      name: provider,
+      url: siteConfig.url,
+      telephone: siteConfig.phone,
+      email: siteConfig.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: siteConfig.address.street,
+        addressLocality: siteConfig.address.city,
+        addressRegion: siteConfig.address.state,
+        postalCode: siteConfig.address.zip,
+        addressCountry: siteConfig.address.country,
+      },
+    },
+    areaServed: {
+      "@type": "Country",
+      name: areaServed,
+    },
+    serviceType: name,
+  };
+}
+
+// ── FAQ Schema ───────────────────────────────────────────
+export function faqSchema(
+  questions: { question: string; answer: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((q) => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: q.answer,
+      },
     })),
   };
 }

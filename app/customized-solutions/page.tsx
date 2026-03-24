@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -11,6 +11,13 @@ export const metadata: Metadata = constructMetadata({
   title: "Customized Solutions",
   description: customizedSolutions.hero.paragraph.slice(0, 160),
   pathname: "/customized-solutions",
+  keywords: [
+    ...keywordGroups.core,
+    "customized compliance solutions",
+    "tailored testing services",
+    "custom facility certification",
+    "specialized environmental testing",
+  ],
 });
 
 export default function CustomizedSolutionsPage() {

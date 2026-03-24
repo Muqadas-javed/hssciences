@@ -10,7 +10,7 @@ import {
   FileText,
   Building2,
 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -18,6 +18,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides comprehensive room validation and environmental performance testing for hospitals, clinics, laboratories, and specialized treatment spaces.",
   pathname: "/medical-facility-room-validation-services",
+  keywords: [
+    ...keywordGroups.cleanroom,
+    "medical facility validation",
+    "room validation testing",
+    "hospital room testing",
+    "operating room certification",
+    "isolation room testing",
+    "healthcare facility compliance",
+    "environmental performance testing",
+  ],
 });
 
 const coreServices = [
@@ -118,6 +128,11 @@ export default function MedicalFacilityRoomValidationPage() {
       href: "/medical-facility-room-validation-services",
     },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Medical Facility & Room Validation Services",
+    description: "Comprehensive room validation and environmental performance testing for hospitals, clinics, laboratories, and specialized treatment spaces.",
+    pathname: "/medical-facility-room-validation-services",
+  });
 
   return (
     <>
@@ -128,6 +143,10 @@ export default function MedicalFacilityRoomValidationPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }}
       />
 
       {/* ── Hero ───────────────────────────────────────────────── */}

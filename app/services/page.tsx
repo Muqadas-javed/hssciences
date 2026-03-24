@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, Shield } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -11,6 +11,16 @@ export const metadata: Metadata = constructMetadata({
   title: "Services — Testing, Certification & Compliance",
   description: services.hero.subheading,
   pathname: "/services",
+  keywords: [
+    ...keywordGroups.core,
+    "testing and certification services",
+    "environmental compliance services",
+    "cleanroom certification",
+    "HVAC testing",
+    "industrial hygiene",
+    "biosafety cabinet testing",
+    "facility compliance",
+  ],
 });
 
 export default function ServicesPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -11,6 +11,14 @@ export const metadata: Metadata = constructMetadata({
   title: "Contact / Request a Quote",
   description: contact.paragraph,
   pathname: "/contact-quote",
+  keywords: [
+    ...keywordGroups.core,
+    "request a quote",
+    "contact HSS",
+    "cleanroom testing quote",
+    "facility certification quote",
+    "environmental compliance quote",
+  ],
 });
 
 export default function ContactPage() {

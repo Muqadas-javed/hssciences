@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { siteContent } from "@/data/siteContent";
 
@@ -9,6 +9,14 @@ export const metadata: Metadata = constructMetadata({
   title: "Company Overview",
   description: about.hero.subheading,
   pathname: "/about/company-overview",
+  keywords: [
+    ...keywordGroups.core,
+    "Health Systems Sciences",
+    "SDVOSB certified company",
+    "environmental testing company",
+    "facility certification firm",
+    "healthcare compliance company",
+  ],
 });
 
 export default function AboutPage() {

@@ -12,7 +12,7 @@ import {
   FileText,
   Building2,
 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -20,6 +20,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides remote surface sampling programs and employee qualification assessments to help pharmacies demonstrate continued compliance with USP 797 and USP 800.",
   pathname: "/remote-surface-sampling",
+  keywords: [
+    ...keywordGroups.usp,
+    "remote surface sampling",
+    "employee qualification support",
+    "USP 797 surface sampling",
+    "USP 800 compliance sampling",
+    "pharmacy surface monitoring",
+    "viable sampling",
+    "non-viable sampling",
+  ],
 });
 
 const samplingCards = [
@@ -136,11 +146,17 @@ export default function RemoteSurfaceSamplingPage() {
     { name: "Services", href: "/services" },
     { name: "Remote Surface Sampling", href: "/remote-surface-sampling" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Remote Surface Sampling & Employee Qualification Support",
+    description: "Remote surface sampling programs and employee qualification assessments for USP 797 and USP 800 compliance.",
+    pathname: "/remote-surface-sampling",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

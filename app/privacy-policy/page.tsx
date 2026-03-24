@@ -7,6 +7,7 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Privacy policy for Health Systems Sciences. Learn how we collect, use, and protect your information.",
   pathname: "/privacy-policy",
+  noIndex: true,
 });
 
 export default function PrivacyPolicyPage() {

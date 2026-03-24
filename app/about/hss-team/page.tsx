@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,14 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Meet the Health Systems Sciences team — certified professionals with deep expertise in cleanroom certification, industrial hygiene, environmental health, and healthcare facility compliance.",
   pathname: "/about/hss-team",
+  keywords: [
+    ...keywordGroups.core,
+    "HSS team",
+    "certified industrial hygienist",
+    "professional engineer",
+    "compliance specialists",
+    "facility testing experts",
+  ],
 });
 
 const leadership = [

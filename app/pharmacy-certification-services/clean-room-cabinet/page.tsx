@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "USP 797, USP 800, USP 825 cleanroom and cabinet certification services for pharmacies nationwide.",
   pathname: "/pharmacy-certification-services/clean-room-cabinet",
+  keywords: [
+    ...keywordGroups.usp,
+    ...keywordGroups.cleanroom,
+    "pharmacy certification services",
+    "USP 825 certification",
+    "compounding pharmacy cleanroom",
+    "primary engineering control testing",
+    "PEC certification",
+    "sterile compounding facility",
+  ],
 });
 
 export default function PharmacyCertificationPage() {
@@ -24,6 +34,11 @@ export default function PharmacyCertificationPage() {
     { name: "Services", href: "/services" },
     { name: "Pharmacy Certification", href: "/pharmacy-certification-services/clean-room-cabinet" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Pharmacy Certification Services",
+    description: "USP 797, USP 800, USP 825 cleanroom and cabinet certification services for pharmacies nationwide.",
+    pathname: "/pharmacy-certification-services/clean-room-cabinet",
+  });
 
   return (
     <>
@@ -34,6 +49,10 @@ export default function PharmacyCertificationPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }}
       />
 
       <section className="relative bg-primary py-20 md:py-28 text-primary-foreground">

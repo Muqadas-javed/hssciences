@@ -10,7 +10,7 @@ import {
   FileText,
   Building2,
 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -18,6 +18,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides biosafety cabinet (BSC) certification and chemical fume hood performance testing services for healthcare, laboratory, and research environments — tested to NSF/ANSI 49 and ANSI/ASHRAE 110.",
   pathname: "/biosafety-cabinet-and-chemical-fume-hood",
+  keywords: [
+    ...keywordGroups.biosafety,
+    "biosafety cabinet certification",
+    "chemical fume hood testing",
+    "NSF/ANSI 49",
+    "ASHRAE 110 testing",
+    "BSC annual certification",
+    "laboratory ventilation testing",
+    "fume hood face velocity",
+  ],
 });
 
 const bscItems = [
@@ -94,11 +104,17 @@ export default function BiosafetyPage() {
     { name: "Services", href: "/services" },
     { name: "Biosafety Cabinet & Chemical Fume Hood", href: "/biosafety-cabinet-and-chemical-fume-hood" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Biosafety Cabinet & Chemical Fume Hood Testing",
+    description: "BSC certification and chemical fume hood performance testing for healthcare, laboratory, and research environments — tested to NSF/ANSI 49 and ANSI/ASHRAE 110.",
+    pathname: "/biosafety-cabinet-and-chemical-fume-hood",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

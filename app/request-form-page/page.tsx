@@ -7,6 +7,13 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Request a personalized quote from Health Systems Sciences. Our specialists will review your information and get back to you promptly with details tailored to your facility's needs.",
   pathname: "/request-form-page",
+  keywords: [
+    "request a quote",
+    "HSS quote",
+    "facility testing quote",
+    "compliance services quote",
+    "cleanroom certification quote",
+  ],
 });
 
 export default function RequestFormPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Wind, Thermometer, Hospital, Shield, Building2 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides HVAC Testing, Adjusting, and Balancing (TAB) services to verify that building ventilation systems deliver the correct airflow rates, pressurization, and environmental performance required for safe and efficient operation.",
   pathname: "/hvac-testing-adjusting-balancing",
+  keywords: [
+    ...keywordGroups.hvac,
+    "HVAC testing adjusting balancing",
+    "TAB services",
+    "air balancing services",
+    "ventilation performance testing",
+    "ASHRAE compliance",
+    "duct leakage testing",
+    "building commissioning",
+  ],
 });
 
 const coreServices = [
@@ -90,11 +100,17 @@ export default function HvacTestingPage() {
     { name: "Services", href: "/services" },
     { name: "HVAC Testing, Adjusting & Balancing", href: "/hvac-testing-adjusting-balancing" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "HVAC Testing, Adjusting & Balancing",
+    description: "HVAC Testing, Adjusting, and Balancing (TAB) services to verify building ventilation systems deliver correct airflow rates, pressurization, and environmental performance.",
+    pathname: "/hvac-testing-adjusting-balancing",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

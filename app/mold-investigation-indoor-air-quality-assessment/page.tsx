@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Search, Droplets, FlaskConical, FileText, Building2 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides comprehensive mold investigation, assessment, sampling, and remediation oversight services for healthcare facilities, hospitals, laboratories, government buildings, and commercial properties.",
   pathname: "/mold-investigation-indoor-air-quality-assessment",
+  keywords: [
+    ...keywordGroups.iaq,
+    "mold investigation services",
+    "mold remediation oversight",
+    "indoor air quality testing",
+    "mold sampling",
+    "air quality assessment",
+    "building mold assessment",
+    "IAQ consulting",
+  ],
 });
 
 const coreServices = [
@@ -81,11 +91,17 @@ export default function MoldInvestigationPage() {
     { name: "Services", href: "/services" },
     { name: "Mold Investigation & Indoor Air Quality Assessment", href: "/mold-investigation-indoor-air-quality-assessment" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Mold Investigation & Indoor Air Quality Assessment",
+    description: "Comprehensive mold investigation, assessment, sampling, and remediation oversight services for healthcare facilities, hospitals, laboratories, and commercial properties.",
+    pathname: "/mold-investigation-indoor-air-quality-assessment",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Wind, FlaskConical, Microscope, ShieldCheck, FileText, Building2 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -9,6 +9,17 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides full-scope certification and testing services to help healthcare facilities maintain compliance with USP 797 (sterile compounding) and USP 800 (hazardous drug handling).",
   pathname: "/usp-797-usp-800-cleanroom-certification-services",
+  keywords: [
+    ...keywordGroups.usp,
+    ...keywordGroups.cleanroom,
+    "USP 797 compliance",
+    "USP 800 compliance",
+    "sterile compounding certification",
+    "hazardous drug handling",
+    "pharmacy cleanroom testing",
+    "beyond-use dating",
+    "compounding pharmacy compliance",
+  ],
 });
 
 const coreServices = [
@@ -88,11 +99,17 @@ export default function Usp797Usp800Page() {
     { name: "Services", href: "/services" },
     { name: "USP 797 & USP 800 Cleanroom Certification Services", href: "/usp-797-usp-800-cleanroom-certification-services" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "USP 797 & USP 800 Cleanroom Certification Services",
+    description: "Full-scope certification and testing services for USP 797 sterile compounding and USP 800 hazardous drug handling compliance.",
+    pathname: "/usp-797-usp-800-cleanroom-certification-services",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

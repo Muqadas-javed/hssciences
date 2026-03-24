@@ -10,7 +10,7 @@ import {
   ShieldAlert,
   Building2,
 } from "lucide-react";
-import { constructMetadata, webPageSchema, breadcrumbSchema } from "@/lib/seo";
+import { constructMetadata, webPageSchema, breadcrumbSchema, keywordGroups, serviceSchema } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = constructMetadata({
@@ -18,6 +18,16 @@ export const metadata: Metadata = constructMetadata({
   description:
     "HSS provides hazardous material management, exposure risk assessment, regulatory compliance support, and facility safety program development for healthcare, laboratory, and research environments.",
   pathname: "/hazardous-material-management",
+  keywords: [
+    ...keywordGroups.hazmat,
+    "hazardous material management",
+    "asbestos testing services",
+    "lead paint assessment",
+    "environmental site assessment",
+    "hazmat consulting",
+    "spill response planning",
+    "regulatory compliance",
+  ],
 });
 
 const coreServices = [
@@ -109,11 +119,17 @@ export default function HazardousMaterialManagementPage() {
     { name: "Services", href: "/services" },
     { name: "Hazardous Material Management", href: "/hazardous-material-management" },
   ]);
+  const svcSchema = serviceSchema({
+    name: "Hazardous Material Management & Safety Support",
+    description: "Hazardous material management, exposure risk assessment, regulatory compliance support, and facility safety program development for healthcare, laboratory, and research environments.",
+    pathname: "/hazardous-material-management",
+  });
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcSchema) }} />
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">

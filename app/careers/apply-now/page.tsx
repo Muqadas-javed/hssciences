@@ -9,6 +9,12 @@ export const metadata: Metadata = constructMetadata({
   description:
     "Apply for a career at Health Systems Sciences. Join our team of engineers, technicians, and compliance specialists.",
   pathname: "/careers/apply-now",
+  keywords: [
+    "apply HSS",
+    "Health Systems Sciences application",
+    "environmental testing career application",
+    "compliance specialist application",
+  ],
 });
 
 export default function ApplyNowPage() {
